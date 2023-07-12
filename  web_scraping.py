@@ -12,18 +12,20 @@ driver = webdriver.Chrome()
 # Đăng nhập
 driver.get('https://www.cryptorefills.com/login')
 select_field = driver.find_element(By.XPATH, '//*[@id="email"]')
-select_field.send_keys('ha11031989@gmail.com')
+select_field.send_keys('nhattantr2002@gmail.com')
 select_field = driver.find_element(By.XPATH, '//*[@id="password"]')
-select_field.send_keys('Ha112002')
-time.sleep(20)
+select_field.send_keys('nhattan2002@123H')
+time.sleep(15)
+
+wait = WebDriverWait(driver, 10)
+select_field  = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'btn.button-custom')))
+select_field .click()
 
 
-
-select_field = driver.find_element(By.CLASS_NAME, 'btn.button-custom')
-select_field.click()
+# select_field = driver.find_element(By.CLASS_NAME, 'btn.button-custom')
+# select_field.click()
 time.sleep(5)
 list = ["Afghanistan"]
-wait = WebDriverWait(driver, 10)
 select_field = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/crypt-root/div/div/div/crypt-shop-page/div/crypt-shop-panel/section/div[2]/div[2]/crypt-countries-dropdown/div/a/span[3]')))
 select_field.click()
 select_field = wait.until(EC.presence_of_element_located((By.XPATH, '/html/body/crypt-root/div/div/div/crypt-shop-page/div/crypt-shop-panel/section/div[2]/div[2]/crypt-countries-dropdown/div/div/crypt-countries-select/div/ul/li[1]/a/div[2]/div')))
@@ -91,12 +93,14 @@ for i in range (0,len(my_lis)):
     # Lấy url trang thanh toán
     pricing_url = driver.current_url
     for m in range (0,len(list_pricing)): 
+        print(m)
         if m != 0 :    
             pricing_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[2]/p-dropdown/div/span")))
             pricing_element.click()
             pricing_container = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[2]/p-dropdown/div/div[3]/div/ul")))
         wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item")))
         list_pricing_tmp = pricing_container.find_elements(By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item")
+        print(len(list_pricing_tmp))
         list_pricing_tmp[m].click()
 
         # bấm vào list network 
@@ -104,19 +108,28 @@ for i in range (0,len(my_lis)):
         network_element.click()
 
         # chọn network
-        network_container = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[3]/p-dropdown/div/div[3]/div/ul")))
-        list_network = network_container.find_elements(By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item.p-highlight")
-
+        # div_ = driver.find_element(By.CLASS_NAME, "cart-content__coins.ng-star-inserted")
+        div_ = driver.find_elements(By.CLASS_NAME, "cart-content__coins.ng-star-inserted")
+        li_ = div_[1].find_elements(By.TAG_NAME, "li")
         network_url = driver.current_url
-        for n in range (0,len(list_network)): 
-            print("X")
+        for n in range (0,len(li_)): 
+            
             if n != 0 :
+                pricing_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[2]/p-dropdown/div/span")))
+                pricing_element.click()
+                pricing_container = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[2]/p-dropdown/div/div[3]/div/ul")))
+                wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item")))
+                list_pricing_tmp_1 = pricing_container.find_elements(By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item")
+                print(len(list_pricing_tmp))
+                list_pricing_tmp_1[m].click()
+
+
                 network_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[3]/p-dropdown/div/span")))
                 network_element.click()
                 # chọn network
-                network_container = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/crypt-root/div/div/div/crypt-cart/div/div/div[2]/div[3]/p-dropdown/div/div[3]/div/ul")))
-            wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item.p-highlight")))
-            list_network_tmp = network_container.find_elements(By.CSS_SELECTOR, "li.p-ripple.p-element.p-dropdown-item.p-highlight")
+                wait.until(EC.visibility_of_element_located((By.CLASS_NAME,"cart-content__coins.ng-star-inserted")))
+                div_ = driver.find_elements(By.CLASS_NAME, "cart-content__coins.ng-star-inserted")
+            list_network_tmp = div_[1].find_elements(By.TAG_NAME, "li")
             list_network_tmp[n].click()
             x = list_network_tmp[n].text
             time.sleep(2)
@@ -130,7 +143,7 @@ for i in range (0,len(my_lis)):
             text = []
             text = pyperclip.paste()
             address_dict = {x: text}
-            # print(json.dumps(address_dict))
+            print(json.dumps(address_dict))
             driver.get(network_url)
             time.sleep(1)
         
