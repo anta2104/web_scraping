@@ -205,15 +205,15 @@ for i in range (0,len(my_lis)):
                 }
         }
         data = []
-        # if os.stat("data.json").st_size != 0:
-        #     with open('data.json', 'r') as f:
-        #         data = json.load(f)
-        # data.append(rs)
-        # with open("data.json", "w") as f:
-        #     json.dump(data, f)
+        if os.stat("data.json").st_size != 0:
+            with open('data.json', 'r') as f:
+                data = json.load(f)
+        data.append(rs)
+        with open("data.json", "w") as f:
+            json.dump(data, f)
         
-        # # Về trang chọn loại và ví
-        # driver.get(url = pricing_url)
+        # Về trang chọn loại và ví
+        driver.get(url = pricing_url)
 
 
     # Back về trang đầu       
