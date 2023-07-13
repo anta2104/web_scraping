@@ -1,6 +1,6 @@
 [{
 	"BTC": {
-		"": [{
+		"Eneba": [{
 			"wallet_address": [{
 				"Mainnet": "3R1tY8R43ut5mRXLLfz4khoqkCconPVALn"
 			}, {
@@ -25,7 +25,7 @@
 	}
 }, {
 	"USDC": {
-		"": [{
+		"Eneba": [{
 			"wallet_address": [{
 				"Polygon (Matic)": "0xc4F58dA8B31632cad49635C49e6276c8622084bB"
 			}, {

@@ -54,7 +54,8 @@ for i in range (0,len(my_lis)):
     my_lis_tmp = my_div_tmp.find_elements(By.TAG_NAME,"li")
 
     # chọn vào sản phẩm thứ i
-    temp = my_lis_tmp[i].find_element(By.CLASS_NAME,"brand-item__image-container")
+    # temp = my_lis_tmp[i].find_element(By.CLASS_NAME,"brand-item__image-container")
+    temp = my_lis_tmp[i].find_element(By.CLASS_NAME,"brand-item__name")
     item = temp.text
     temp.click()
     time.sleep(1)
@@ -204,15 +205,15 @@ for i in range (0,len(my_lis)):
                 }
         }
         data = []
-        if os.stat("data.json").st_size != 0:
-            with open('data.json', 'r') as f:
-                data = json.load(f)
-        data.append(rs)
-        with open("data.json", "w") as f:
-            json.dump(data, f)
+        # if os.stat("data.json").st_size != 0:
+        #     with open('data.json', 'r') as f:
+        #         data = json.load(f)
+        # data.append(rs)
+        # with open("data.json", "w") as f:
+        #     json.dump(data, f)
         
-        # Về trang chọn loại và ví
-        driver.get(url = pricing_url)
+        # # Về trang chọn loại và ví
+        # driver.get(url = pricing_url)
 
 
     # Back về trang đầu       
